@@ -73,8 +73,9 @@ $new_query = "";
 
 for ($x = 0; $x < count($deck_array); $x++) {
 	$xx = $x + 1;
-	$new_query = $new_query . "UPDATE jmas.deck SET challenge=" . $deck_array[$x] . " WHERE id=" . $xx  . " ;\r";
-    echo "entry number $x is $deck_array[$x]<br>";
+	$symbol = floor( $x / 4 ) + 1;
+	$new_query = $new_query . "UPDATE jmas.deck SET challenge=" . $deck_array[$x] . ", symbol=" . $symbol . " WHERE id=" . $xx  . " ;\r";
+    echo "entry number $x is $deck_array[$x], with symbol # $symbol <br>";
 } 
 
 echo "<pre>";
