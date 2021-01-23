@@ -28,8 +28,12 @@ if (!$conn) {
 
 
 ?>
+
+<head>
+<meta http-equiv="refresh" content="3; url='./admin.php'">
+</head>
+<body>
 <div style="position:relative;margin:20px;margin-top:50px;">
-<table>
 
 <?php
 
@@ -88,5 +92,5 @@ echo  mysqli_error($conn);
 ?>
 
 <br><?= count($deck_array) ?> items randomized
-
+</div>
 </body>

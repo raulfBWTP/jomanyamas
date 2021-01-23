@@ -1,12 +1,4 @@
 <?php
-function str_replace_first($search, $replace, $subject) {
-    $pos = strpos($subject, $search);
-    if ($pos !== false) {
-        return substr_replace($subject, $replace, $pos, strlen($search));
-    }
-    return $subject;
-}
-
 
 $username = $_SERVER['PHP_AUTH_USER'];
 
@@ -40,41 +32,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          $sql ="INSERT INTO challenges (creator,challenge_text) VALUES ('" . $username . "','" . $text . "')";
          $result = mysqli_query($conn, $sql);
          if ($result) {
-         echo "Added!<br>";
+             echo "Added!<br>";
          } else {
-        $errorText = mysqli_error($conn);
-        if (strpos($errorText, "Duplicate") !== false) {
-            echo '{ "status" : "conflict", "error" : "' . $errorText .'"}';
-        } else {
-            echo '{ "status" : "error", "error" : "' . $errorText .'"}';
+            echo mysqli_error($conn);
         }
-        }
+        header("Location: ./jmas_entry.php");
      } else if ($action == "delete") {
-         $sql ="DELETE FROM challenges WHERE id='" . $id . "'";
+         $sql ="DELETE FROM jmas.challenges WHERE id=" . $id . "";
          $result = mysqli_query($conn, $sql);
+         if (!$result) {
+         echo mysqli_error($conn); 
+        } else {
+         header("Location: ./jmas_entry.php");
+        }
      }
 ?>
-<?php header("Location: ./jmas_entry.php"); ?>
+
 <?php
 } else {
 
 
-include("jmas_header.php");
-
-
-
-
+include("challenge_header.php");
 
 ?>
-<div style="position:relative;margin:20px;margin-top:50px;">
-<table>
-
+<div id="challengeList" style="margin-left:15px">
+<table class="shadowed greenTable">
+<?php
+if ($username == "kelly" || $username == "raul") {
+?>
+   <tr> <td>Player</td><td>Use</td><td>Text</td><td>Delete</td>
+     
+     </tr>
+<?php	
+}
+?>
 <?php
 // make the sql request
 $sql = "SELECT * FROM jmas.challenges where creator = '" . $username . "'";
 
 // show all if it's raul (who logs in as kelly)
-if ($username == "kelly") {
+if ($username == "kelly" || $username == "raul") {
     $sql = "SELECT * FROM jmas.challenges";
 }
 $result = mysqli_query($conn, $sql);
@@ -89,6 +86,7 @@ if (mysqli_num_rows($result) > 0) {
     $id = $row['id'];
     $creator = $row['creator'];
     $challenge_text = $row['challenge_text'];
+    $include = $row['include'];
 if ($ii <  mysqli_num_rows($result)) { 
 $comma = ",";
 } else { 
@@ -97,15 +95,19 @@ $comma="";
 ?>
     <tr>
 <?php
-if ($username == "kelly") {
+if ($username == "kelly" || $username == "raul") {
+
+$is_checked =  ($include == 1) ? "checked" : " ";
+$toggle = 1 - $include;
 ?>
     <td><?=$creator?></td>
+     <td><input type="checkbox" name="enable" value="1" <?= $is_checked ?> onclick="toggleChallengeInclude(<?=$id?>, <?=$toggle?>)"></td>
 <?php	
 }
 ?>
     <td><?=$challenge_text?></td>
-    <td class="center">
-    <button onClick="doDeleteConfirm('<?=$id?>')">Delete</button>
+    <td class="center" >
+    <button onClick="doDeleteConfirm('<?=$id?>')" style="margin:3px;">Delete</button>
     </td>
 </tr>
 
@@ -116,27 +118,7 @@ if ($username == "kelly") {
 ?>
 </table>
 </div>
-<div id="addHolder">
-    <div class="dimmer">
-    &nbsp;
-    </div>
-    <div id="addForm" class="popup">
-    Type in the text for the challenge...<br>
-    <form action="jmas_entry.php" method="POST">
-        <textarea id="newEntry" name="challenge_text" ></textarea><br>
-        <input type="hidden" name="action" value="add">
-        <div class="buttonHolder">
-            <button name="submit" type="submit">
-            Save
-            </button>
-            <button name="reset" type="reset" onclick="hideDiv('addHolder')">
-            Cancel
-            </button>
-        </div>
-    </form>
-    </div>
-</div>
-
+<?php include("add_holder.php");?>
 <div id="deleteView">
     <div class="dimmer">
     &nbsp;
@@ -150,7 +132,7 @@ if ($username == "kelly") {
             <button name="submit" type="submit">
             Delete
             </button>
-            <button name="reset" type="reset" onclick="hideDiv('deleteView')">
+            <button name="reset" class="purple border1" type="reset" onclick="hideDiv('deleteView')">
             Cancel
             </button>
         </div>

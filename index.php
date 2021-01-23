@@ -1,35 +1,18 @@
 <?php
-function str_replace_first($search, $replace, $subject) {
-    $pos = strpos($subject, $search);
-    if ($pos !== false) {
-        return substr_replace($subject, $replace, $pos, strlen($search));
-    }
-    return $subject;
-}
 
 
 $username = $_SERVER['PHP_AUTH_USER'];
 
-$database  = "jmas"; 
-$user      = "WWDGRemote";    
-$password  = "QpVH.,urpiAm8JX8";
-$servername      = "localhost";
-
-// Create connection
-$conn = mysqli_connect($servername, $user, $password, $database);
-// Check connection
-if (!$conn) { 
-    die("Error:  Connection failed: " . mysqli_connect_error());
+if ($username == "raul") {
+header("Location: ./admin.php");
 }
 
+
+include("connect.php");
 
 // make the sql request
-$sql = "SELECT * FROM jmas.players where name = '" . $username . "'";
 
-// show all if it's raul (who logs in as kelly)
-if ($username == "kelly") {
-    $sql = "SELECT * FROM jmas.challenges";
-}
+$sql = "SELECT * FROM jmas.game_state_player where id=1";
 $result = mysqli_query($conn, $sql);
 
 //echo $result;
@@ -37,41 +20,35 @@ if (mysqli_num_rows($result) > 0) {
 	$row = $result->fetch_assoc();
 
     // Get the relevant data
-    $current_card = $row['current_card'];
-
-}
+    $in_progress = $row['game_in_progress'];
 ?>
-<head>
-<title>
-Jo'manyamas!
-</title>
-<script type="text/javascript" src="./jmas.js"></script>
-</head>
-<body>
-<div id='titleDiv'>
-Jo'manyamas Home Page
-</div>
-<div id='playDiv'>
-Play section<br>
-<button onclick="showDiv('currentCard')"> Show my challenge </button>
-<div id="currentCard" style="display:none;">
-Current challenge:<br>
+<html>
+	<head>
+	<title>
+		Jo'manyamas!
+	</title>
+	<script type="text/javascript" src="./jmas.js"></script>
+
+	<link REL="stylesheet" HREF="jmas.css" TYPE="text/css" >
+
+<meta name="viewport" content="width=400" >
+	</head>
+	<body>
+		<div class="pageHeader">
+            <?php include("home_menu.php");?>
+			<div id='titleDiv' class="pageTitle">Jo'manyamas!</div>
+		</div>
+		<div class="menuActions">
 <?php
-// make the sql request
-$sql = "SELECT * FROM jmas.deck_card where id = '" . $current_card . "'";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-	$row = $result->fetch_assoc();
+if ($in_progress == 0)  {
+		include("pre_game_buttons.php");	
+	} else {
 
-    // Get the relevant data
-    $symbol_name = $row['symbol_name'];
-    $challenge_text = $row['challenge_text'];
-
+		include("game_buttons.php");
+	}
 }
-
+	 
 ?>
-<div id="symbol"><?=$symbol_name?><br></div>
-<div id="challengeText"><?=$challenge_text?><div>
-</div>
-</div>
-</body>
+		</div>
+	</body>
+</html>

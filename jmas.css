@@ -1,0 +1,401 @@
+
+body {
+    background-color: #fff;
+    font-family: "Futura" /*,Arial, Helvetica, sans-serif;*/
+}
+
+#addHolder {
+    display: none;
+    z-index: 15;
+    text-align: center;
+}
+
+#giftDetail {
+    display: none;
+    z-index: 15;
+    text-align: center;
+}
+
+#deleteView {
+    display: none;
+    z-index: 15;
+}
+
+.nopadding {
+    padding: 0px;
+    margin: 0px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.pageHeader {
+    position:fixed;
+    top:0px;
+    left:0px;
+    
+    width: 100%;
+    text-align:center;
+    background-color:#b9c;
+    font-size: 20px;
+    z-index: 10;
+    padding: 6px;
+    color: white;
+    box-shadow: 0px 5px 10px 1px #e0dde0;
+    min-height: 45px;
+}
+
+
+.pageTitle {
+    text-align: center;
+    //font-weight: bold;
+    font-size: 24px;
+    font-family: "Gill Sans";
+    padding-top: 9px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.instruction {
+    font-size: 18px;
+    margin: 5px;;
+}
+
+
+
+.buttonHolder {
+    text-align: right;
+}
+
+
+#newEntry {
+	width:100%;
+	max-width: 100%;
+	min-height: 40px;
+}
+
+.popupTextField {
+	width:95%;
+	max-width: 95%;
+	min-width: 95%;
+	min-height: 40px;
+	max-height: 140px;
+	font-size: 16px;
+}
+
+.emphasis {
+    font-weight: bold;
+    color: #b9c;
+}
+
+
+/* ******* Visual Styles ******** */
+
+.bordered {
+	border-width: 1px;
+	border-color: #a2b;
+	border-style: solid;
+}
+
+
+.border1 {
+    border-color: #a2b;
+    border-width: 1px;
+	border-style: solid;
+}
+
+
+.center {
+    text-align: center;
+}
+
+.purple {
+    background-color: #faeeff;
+}
+
+
+.rounded {
+    border-radius: 10px;
+}
+
+.shadowed {
+        box-shadow: 0px 3px 7px 1px #e0dde0;
+}
+
+.smallmargin {
+    margin: 5px;
+}
+
+
+/* ******** Functional Styles ******** */
+
+.homeIcon {
+	float:left;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.dimmer {
+	width:120%;
+	height:150%;
+	background-color: #000;
+	opacity: 0.5;
+	position: fixed;
+	top: 0px;
+	left: -30px;
+	z-index: 10;
+}
+
+.deckTile {
+    width: 22%; 
+    height: 37px;
+    margin: 1%;
+    text-align: center;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    color: #627;
+}
+
+.deckPopup {
+    width: 100px; 
+    height: 37px;
+    margin: 10px;
+    text-align: center;
+    font-size: 24px;
+    color: #627;
+}
+
+.noborder {
+    border: none;
+}
+
+
+.dimmed {
+    color: #879;
+    background-color: #fce0fc;
+}
+
+.popup {
+    position: absolute;
+    z-index: 20;
+    top:50px;
+    left:-20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #fcfcfc;
+    padding:20px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    width:80%;
+    text-align: left;
+}
+
+.confirm {
+	display:none;
+}
+ 
+ 
+.swapPopup {
+    position: absolute;
+    width:80%;
+    height:80%;
+    text-align: center;
+    margin: 20px;
+    background-color: #EFE;
+    z-index: 100;
+    border-radius: 20px;
+}
+
+#header {
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 80px;
+    text-align:center;
+    background-color:#9c9;
+    font-size: 20px;
+    z-index: 10;
+    padding: 6px;
+    color: white;
+}
+
+table {
+  /*font-family: arial, sans-serif; */
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 20px;
+    border: 2px solid #00ff00;
+      /* add this */
+        border-color: black;
+    overflow:hidden;
+}
+
+.greenTable {
+    background-color: #b9c;
+}
+
+
+
+td, th {
+  border: 1px solid #b9c;
+
+  text-align: left;
+  padding: 8px;
+  padding-left: 16px;
+}
+
+tr:nth-child(even) {
+      background-color: white;
+/*background-color: #ddffdd;*/
+}
+
+.greenTable tr:nth-child(odd) {
+
+background-color: #ddffdd;
+}
+
+button  {
+	padding-left: 15px;
+	padding-right: 15px;
+	height:38px;
+	border-radius: 10px;
+	border-color: #2b2;
+	border-style: solid;
+	font-size: 18px;
+	margin: 10px;
+	text-align: center;
+	background-color: #DFE;
+	color: #434;
+}
+
+.futura {
+    font-family: "Futura", "Gill Sans";
+}
+
+#inventoryList {
+	position:relative;
+	margin:40px;
+	margin-top: 80px;
+}
+
+
+#challengeList {
+	position:relative;
+	margin:40px;
+	margin-top: 110px;
+}
+
+
+#challengeText { 
+	font-family: "Marker Felt"; 
+	font-size: 18px;
+	width: 300px;
+	border-width: 1px;
+		border-color: #a2b;
+	border-style: solid;
+	padding-top: 40%; 
+	padding-bottom: 40%; 
+	display: none;
+}
+
+.formInput {
+    position: relative;
+    margin:5px;
+    padding: 5px;
+}
+
+
+
+.giftImage {
+    max-width: 90px;
+    max-height: 90px;
+    left: 0px;
+    margin: 2px;
+}
+
+.giftImageBig {
+    max-width: 200px;
+    max-height: 200px;
+    left: 0px;
+    margin: 2px;
+}
+
+.giftImageBigger {
+    max-width: 350px;
+    max-height: 350px;
+    left: 0px;
+    margin: 2px;
+}
+
+.giftText {
+    position: relative;
+}
+
+.textEntry {
+    width: 95%;
+    font-size: 16px;
+}
+
+.textTable {
+    border: none;
+    padding: 0px;
+}
+
+.giftName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.giftListing {
+	margin: 5px;
+	padding: 5px;
+}
+
+
+.menuActions {
+	position:relative;
+	margin:40px;
+	margin-top: 80px;
+	text-align: center;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+
+.menuButton {
+	width: 80%;
+}
+
+.scrollContentGifts {
+	margin:3px;
+	padding: 0px;
+	margin-top: 80px;
+	text-align: center;
+}
+
+.scrollContent {
+	margin:40px;
+	margin-top: 80px;
+	text-align: center;
+}
+
+.addButton {
+    position: absolute;
+    right: 3px;
+    top:0px;
+    margin-right: 10px;
+}
+
+.swapButton {
+	float: right;
+}
+
+
+#symbolImage {
+	width: 80%;
+}
+

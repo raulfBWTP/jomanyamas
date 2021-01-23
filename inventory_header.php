@@ -1,8 +1,8 @@
 <?php include("html_header.php");?>
 <body>
-<div class="pageHeader">
+    <div id="inventoryHeader" class="pageHeader">
         <?php include("home_menu.php");?>
         <div class="pageTitle">
-            <?=$display_name?>'s Jo'manyamas Menu
+        <?=$display_name?>'s Prizes
         </div>
     </div>
